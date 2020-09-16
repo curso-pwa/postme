@@ -1,0 +1,19 @@
+{
+  "name": "postme",
+  "version": "1.0.0",
+  "description": "Es una aplicacion progresiva",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1 ."
+  },
+  "keywords": [
+    "pwa",
+    "postme",
+    "EDteam"
+  ],
+  "author": "adry.dabp@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}

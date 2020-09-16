@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PostMe</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.brown-orange.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="src/css/app.css">
+  <script src="src/js/app.js"></script>
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Postme</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link" href="">Ver publicaciones</a>
+          <a class="mdl-navigation__link" href="">Imagenes</a>
+          <a class="mdl-navigation__link" href="">Videos</a>
+          <a class="mdl-navigation__link" href="">Audios</a>
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">
+          <i class="material-icons mdl-color-text--primary">home</i>
+          Ir a la página principal
+        </a>
+        <a class="mdl-navigation__link" href="">
+          <i class="material-icons mdl-color-text--primary">post_add</i>
+          Ver publicaciones</a>
+        <a class="mdl-navigation__link" href="">
+          <i class="material-icons mdl-color-text--primary">camera_alt</i>
+          Imagenes</a>
+        <a class="mdl-navigation__link" href="">
+          <i class="material-icons mdl-color-text--primary">ondemand_video</i>
+          Videos</a>
+        <a class="mdl-navigation__link" href="">
+          <i class="material-icons mdl-color-text--primary">music_video</i>
+          Audios</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <div id="main">
+          <div id="main">
+            <div class="card-wide mdl-card page-index">
+              <div class="svg--container">
+                <div></div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#4b2c20" fill-opacity="1" d="M0,256L40,240C80,224,160,192,240,197.3C320,203,400,245,480,229.3C560,213,640,139,720,117.3C800,96,880,128,960,170.7C1040,213,1120,267,1200,288C1280,309,1360,299,1400,293.3L1440,288L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+              </div>
+              <div class="page--initial">
+                <i class="material-icons">emoji_objects</i>
+                <div class="description">
+                  Si no quieres olvidarte de una idea, mensaje, palabra, etc... publicala y hazlo persistente.
+                </div>
+              </div>
+              <div class="page--initial">
+                <i class="material-icons">add_a_photo</i>
+                <div class="description">
+                  Si no quieres perder fotos que tomaste de lugares, personas y eventos que te gustaron, publicala para que no se pierda.
+                </div>
+              </div>
+              <div class="page--initial">
+                <i class="material-icons">ondemand_video</i>
+                <div class="description">
+                  Si no quieres escribir y solo deseas grabar un video o un audio, tambien puedes hacerlo y volverlo un recuerdo para siempre.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Boton add -->
+      <div class="floating-button">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="btn-upload-post">
+          <i class="material-icons">add</i>
+        </button>
+      </div>
+      <!-- Seccion para agregar un post -->
+      <div class="card-wide mdl-card" id="modal-post-section">
+        <div class="mdl-card__supporting-text">
+          <form action="#">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="title">
+                <label class="mdl-textfield__label" for="title">Título</label>
+              </div>
+              <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <textarea class="mdl-textfield__input" type="text" rows= "3" id="description"></textarea>
+                <label class="mdl-textfield__label" for="description">Descripción</label>
+              </div>
+              <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--6-col">
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--white mdl-color--primary-dark" id="btn-post-submit">
+                      Enviar post
+                    </button>
+                  </div>
+                  <div class="mdl-cell mdl-cell--6-col">
+                    <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="btn-post-cancel">
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
