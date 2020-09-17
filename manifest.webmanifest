@@ -1,0 +1,38 @@
+{
+  "short_name": "postme",
+  "name": "postme app",
+  "description": "La aplicación postme nos ayudara a compartir nuestros momentos, como ser fotos y texto",
+  "background_color": "#4b2c20",
+  "theme_color": "#4b2c20",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "scope": ".",
+  "icons": [
+    {
+      "src": "src/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "src/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "src/images/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "src/images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "src/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
