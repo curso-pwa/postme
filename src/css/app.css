@@ -93,3 +93,28 @@
   padding: 10px;
   width: calc(var(--width) - 20px);
 }
+
+.app--install {
+  background: var(--primary);
+  color: var(--white) !important;
+  display: flex;
+  flex-direction: row;
+}
+.app--install:hover {
+  background: var(--primary) !important;
+}
+.app--install div:first-child {
+  text-align: left;
+  font-size: 12px;
+  padding: 5px 0 8px 5px;
+}
+.app--install div:last-child {
+  border: 1px solid rgba(255, 255, 255, .5); 
+  border-radius: 4px;
+  float: right;
+  padding: 5px 8px;
+}
+
+.select-none {
+  user-select: none;
+}
