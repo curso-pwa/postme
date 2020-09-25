@@ -1,13 +1,13 @@
-db.enablePersistence()
-  .catch(err => {
-    if (err.code == 'failed-precondition') {
-      // Tener cuidado, no abrir muchas pestañas. Modo offline solo funciona con un solo tab
-      console.error('persistence failed');
-    } else if (err.code === 'unimplemented') {
-      // Tu navegador no soporta este tipo de tecnologia
-      console.error('persistence is not available');
-    }
-  });
+// db.enablePersistence()
+//   .catch(err => {
+//     if (err.code == 'failed-precondition') {
+//       // Tener cuidado, no abrir muchas pestañas. Modo offline solo funciona con un solo tab
+//       console.error('persistence failed');
+//     } else if (err.code === 'unimplemented') {
+//       // Tu navegador no soporta este tipo de tecnologia
+//       console.error('persistence is not available');
+//     }
+//   });
 
 const createPosts = ({ description, title, image, timestamp }) => {
   let UNIX;

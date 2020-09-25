@@ -1,3 +1,5 @@
+importScripts('https://cdn.jsdelivr.net/npm/pouchdb@7.2.1/dist/pouchdb.min.js');
+
 const CACHE_NAME_CORE = 'cache-v1';
 const CACHE_FILES_CORE = [
   'src/images/icons/icon-144x144.png',
@@ -22,6 +24,7 @@ const CACHE_FILES_INMUTABLE = [
   'https://fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
   'https://unpkg.com/dayjs@1.8.21/dayjs.min.js',
   'https://unpkg.com/dayjs@1.8.35/plugin/relativeTime.js',
+  'https://cdn.jsdelivr.net/npm/pouchdb@7.2.1/dist/pouchdb.min.js',
   'https://unpkg.com/pwacompat'
 ];
 
