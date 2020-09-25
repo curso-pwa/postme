@@ -59,119 +59,50 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 // Cuando se cargue todo nuestro DOM
 window.addEventListener('load', async () => {
-  MAIN = document.querySelector('#main');
-  MODAL_POST = document.querySelector('#modal-post-section');
-  BTN_SHOW_POST = document.querySelector('#btn-upload-post');
-  BTN_SHOW_POST.addEventListener('click', showPostModal);
-  BTN_CANCEL_POST = document.querySelector('#btn-post-cancel');
-  BTN_CANCEL_POST.addEventListener('click', closePostModal);
-
-  // await Notification.requestPermission();
-
-  if ('serviceWorker' in navigator) {
-    const response = await navigator.serviceWorker.register('sw.js');
-    if (response) {
-      const ready = await navigator.serviceWorker.ready;
-      // ready.showNotification('Hola curso-pwa..', {
-      //   body: 'Este sera un mensaje mas largo',
-      //   vibrate: [200, 100, 200, 100, 200, 100, 200]
-      // });
+  try {
+    MAIN = document.querySelector('#main');
+    MODAL_POST = document.querySelector('#modal-post-section');
+    BTN_SHOW_POST = document.querySelector('#btn-upload-post');
+    BTN_SHOW_POST.addEventListener('click', showPostModal);
+    BTN_CANCEL_POST = document.querySelector('#btn-post-cancel');
+    BTN_CANCEL_POST.addEventListener('click', closePostModal);
+  
+    // await Notification.requestPermission();
+  
+    if ('serviceWorker' in navigator) {
+      await navigator.serviceWorker.register('sw.js');
     }
-  }
-
-  window.Message = (option = 'success', container = document.querySelector('#toast-container')) => {
-    container.classList.remove('success');
-    container.classList.remove('error');
-    container.classList.add(option);
-    return container;
-  };
-
-  window.Loading = (option = 'block') => {
-    document.querySelector('#loading').style.display = option;
-  };
-
-
-  // Agarrando el boton enviar post
-  const btnPostSubmit = document.querySelector('#btn-post-submit');
-  btnPostSubmit.addEventListener('click', (e) => sendData(e));
-
-  const bannerInstall = document.querySelector('#banner-install');
-  bannerInstall.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const response = await deferredPrompt.userChoice;
-      if (response.outcome === 'dismissed') {
-        console.error('El usuario cancelo la instalación');
+  
+    window.Message = (option = 'success', container = document.querySelector('#toast-container')) => {
+      container.classList.remove('success');
+      container.classList.remove('error');
+      container.classList.add(option);
+      return container;
+    };
+  
+    window.Loading = (option = 'block') => {
+      document.querySelector('#loading').style.display = option;
+    };
+  
+    // Agarrando el boton enviar post
+    const btnPostSubmit = document.querySelector('#btn-post-submit');
+    btnPostSubmit.addEventListener('click', (e) => sendData(e));
+  
+    const bannerInstall = document.querySelector('#banner-install');
+    bannerInstall.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const response = await deferredPrompt.userChoice;
+        if (response.outcome === 'dismissed') {
+          console.error('El usuario cancelo la instalación');
+        }
       }
-    }
-  });
-
-  // IndexDB
-  // if ('indexedDB' in window) {
-  //   const request = window.indexedDB.open('mi-base-datos', 2);
-
-  //   // Observer 
-  //   request.onupgradeneeded = event => {
-  //     let db = event.target.result;
-  //     db.createObjectStore('cursos', {
-  //       keyPath: 'id'
-  //     });
-  //   };
-  //   // Errores
-
-  //   request.onerror = (event) => {
-  //     console.log('----------Esto cuando ocurrira cualquier cosa que no tengamos en cosideracion-----------');
-  //     console.log(event);
-  //     console.log('------------------------------------');
-  //   };
-    // Success
-
-    // request.onsuccess = (event) => {
-
-    //   // Agregar
-    //   let db = event.target.result;
-      
-    //   const cursosData = [
-    //     {
-    //       id: '1',
-    //       curso: 'Mi primera PWA',
-    //       descripcion: 'Este sera un curso para trabajar offline'
-    //     },
-    //     {
-    //       id: '2',
-    //       curso: 'React Avanzado',
-    //       descripcion: 'Curso de react con puro hooks'
-    //     },
-    //     {
-    //       id: '3',
-    //       curso: 'Vue Avanzado',
-    //       descripcion: 'Curso en el cual veremos un clon de youtube'
-    //     }
-    //   ];
-
-    //   let cursosTransaccion = db.transaction('cursos', 'readwrite');
-
-    //   // Ocurre un error en la transaccion
-    //   cursosTransaccion.onerror = (event) => {
-    //     console.error('[IDB]', event.target.error );
-    //   };
-
-    //   // Informa sobre el éxito de la transacción
-    //   cursosTransaccion.oncomplete = event => {
-    //     console.info('[IDB]', event);
-    //   }; 
-
-    //   let cursosStore = cursosTransaccion.objectStore('cursos');
-      
-    //   for ( let curso of cursosData ) {
-    //     cursosStore.add( curso );
-    //   }
-      
-    //   cursosStore.onsuccess = event => {
-    //     console.info('Nuevo curso agregado al IDB');
-    //   };
-    // };
-
-  // }
-
+    });
+  } catch (error) {
+    const data = {
+      message: error.message,
+      timeout: 5000
+    };
+    Message('error').MaterialSnackbar.showSnackbar(data);
+  }
 });
