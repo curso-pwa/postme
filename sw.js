@@ -114,9 +114,30 @@ self.addEventListener('fetch', (event)=> {
 });
 
 self.addEventListener('sync', (event) => {
-  console.log('----------------------------------');
-  console.log(event);
-  console.log('-----------------------------------');
+  if (event.tag === 'new-post') {
+    const urlRD = 'https://postme-app.firebaseio.com/postme-app.json';
+    const dbPost = new PouchDB('posts');
+    dbPost.allDocs(({ include_docs: true }))
+      .then((docs) => {
+        docs.rows.forEach(registro => {
+          const doc = registro.doc;
+          fetch(urlRD, {
+            method: 'POST',
+            cors: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(doc)
+          })
+            .then(response => {
+              console.info('La transaccion o registro salio exitosamente');
+              dbPost.remove(doc);
+            })
+            .catch(err => console.error(err.message));
+        })
+      })
+  }
 });
 
 self.addEventListener('push', (event) => {

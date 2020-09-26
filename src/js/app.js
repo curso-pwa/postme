@@ -6,6 +6,7 @@ let BTN_CANCEL_POST;
 let deferredPrompt;
 let TITLE;
 let DESCRIPTION;
+let DB_POUCH;
 // Funciones
 const showPostModal = () => {
   MAIN.style.display = 'none';
@@ -25,14 +26,24 @@ const sendData = async (e) => {
     TITLE = document.querySelector('#title').value;
     DESCRIPTION = document.querySelector('#description').value;
     if (TITLE && DESCRIPTION) {
-      await db.collection('posts').add({
+      const post = {
         title: TITLE,
         description: DESCRIPTION,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
+      }
+      // Vamos a utilizar el SyncManager
+      if (window.SyncManager) {
+        // Grabar o armar nuestra logica
+        const readySW = await navigator.serviceWorker.ready;
+        await readySW.sync.register('new-post');
+        post._id = new Date().toISOString();
+        await DB_POUCH.put(post);
+      } else {
+        post.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+        await db.collection('posts').add(post);
+      }
       const data = {
         message: 'Registro exitosamente almacenado',
-        timeout: 1500  // 1 con 30
+        timeout: 5000
       };
       Message().MaterialSnackbar.showSnackbar(data);
     } else {
@@ -60,6 +71,9 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // Cuando se cargue todo nuestro DOM
 window.addEventListener('load', async () => {
   try {
+    // Declarando mi instancia de base de datos creada por PouchDB
+    DB_POUCH = new PouchDB('posts');
+
     MAIN = document.querySelector('#main');
     MODAL_POST = document.querySelector('#modal-post-section');
     BTN_SHOW_POST = document.querySelector('#btn-upload-post');
