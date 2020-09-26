@@ -68,7 +68,7 @@ const showNotification = () => {
   // new Notification('Notificaciones exitosamente activadas');
   navigator.serviceWorker.getRegistration()
     .then(instancia => {
-      instancia.showNotification('Notificaciones exitosamente activadas', {
+      instancia.showNotification('Notificaciones exitosamente activadas para el dispositivo', {
         body: 'El cuerpo de la notificacion',
         icon: 'src/images/icons/icon-144x144.png',
         image: 'src/images/computer.jpg',
@@ -119,9 +119,6 @@ window.addEventListener('load', async () => {
     BTN_SHOW_POST.addEventListener('click', showPostModal);
     BTN_CANCEL_POST = document.querySelector('#btn-post-cancel');
     BTN_CANCEL_POST.addEventListener('click', closePostModal);
-    // Seccion notificaciones
-    BTN_NOTIFICATIONS = document.querySelector('#notifications-install');
-    BTN_NOTIFICATIONS.addEventListener('click', requestPermission);
   
     if ('serviceWorker' in navigator) {
       await navigator.serviceWorker.register('sw.js');
@@ -138,6 +135,9 @@ window.addEventListener('load', async () => {
       document.querySelector('#loading').style.display = option;
     };
   
+    // Seccion notificaciones
+    BTN_NOTIFICATIONS = document.querySelector('#notifications-install');
+    BTN_NOTIFICATIONS.addEventListener('click', requestPermission);
     // Agarrando el boton enviar post
     const btnPostSubmit = document.querySelector('#btn-post-submit');
     btnPostSubmit.addEventListener('click', (e) => sendData(e));

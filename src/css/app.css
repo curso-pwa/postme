@@ -175,7 +175,6 @@
 }
 
 /* Notificaciones */
-
 .notifications--install {
   background: var(--secondary);
   color: var(--white) !important;
