@@ -1,20 +1,25 @@
 {
-  "name": "postme",
+  "name": "postme-backend",
   "version": "1.0.0",
-  "description": "Es una aplicacion progresiva",
+  "description": "Esta sera el backend de postme el cual mostrar la carpeta public como frontend",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -c-1 .",
-    "secure": "ngrok http 8080"
+    "start": "node index.js",
+    "web-push": "web-push generate-vapid-keys"
   },
-  "keywords": [
-    "pwa",
-    "postme",
-    "EDteam"
-  ],
-  "author": "adry.dabp@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curso-pwa/postme.git"
+  },
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "http-server": "^0.12.3"
+  "bugs": {
+    "url": "https://github.com/curso-pwa/postme/issues"
+  },
+  "homepage": "https://github.com/curso-pwa/postme#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "web-push": "^3.4.4"
   }
 }
