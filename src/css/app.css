@@ -173,3 +173,26 @@
 .card-posts > .mdl-card__menu {
   color: var(--white);
 }
+
+/* Notificaciones */
+
+.notifications--install {
+  background: var(--secondary);
+  color: var(--white) !important;
+  display: flex;
+  flex-direction: row;
+}
+.notifications--install:hover {
+  background: var(--secondary) !important;
+}
+.notifications--install div:first-child {
+  text-align: left;
+  font-size: 12px;
+  padding: 5px 0 8px 5px;
+}
+.notifications--install div:last-child {
+  border: 1px solid rgba(255, 255, 255, .5); 
+  border-radius: 4px;
+  float: right;
+  padding: 5px 8px;
+}

@@ -7,6 +7,7 @@ let deferredPrompt;
 let TITLE;
 let DESCRIPTION;
 let DB_POUCH;
+let BTN_NOTIFICATIONS;
 // Funciones
 const showPostModal = () => {
   MAIN.style.display = 'none';
@@ -63,6 +64,44 @@ const sendData = async (e) => {
 };
 
 
+const showNotification = () => {
+  // new Notification('Notificaciones exitosamente activadas');
+  navigator.serviceWorker.getRegistration()
+    .then(instancia => {
+      instancia.showNotification('Notificaciones exitosamente activadas', {
+        body: 'El cuerpo de la notificacion',
+        icon: 'src/images/icons/icon-144x144.png',
+        image: 'src/images/computer.jpg',
+        badge: 'src/images/icons/icon-144x144.png',
+        dir: 'ltr',
+        tag: 'notification-postme',
+        requireInteraction: true,
+        vibrate: [100, 50, 200],
+        actions: [
+          { action: 'confirm', title: 'Aceptar', icon: 'src/images/icons/icon-144x144.png' },
+          { action: 'cancel', title: 'Cancelar', icon: 'src/images/icons/icon-144x144.png' }
+        ]
+      });
+    })
+    .catch(err => console.error(err.message))
+};
+
+
+const requestPermission = async () => {
+  const result = await Notification.requestPermission();
+  if (result !== 'granted') {
+    const data = {
+      message: 'El usuario no activo las notificaciones',
+      timeout: 5000
+    };
+    Message('error').MaterialSnackbar.showSnackbar(data);
+  } else {
+    // configuracionSubscripcion();
+    showNotification();
+  }
+};
+
+
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
@@ -80,8 +119,9 @@ window.addEventListener('load', async () => {
     BTN_SHOW_POST.addEventListener('click', showPostModal);
     BTN_CANCEL_POST = document.querySelector('#btn-post-cancel');
     BTN_CANCEL_POST.addEventListener('click', closePostModal);
-  
-    // await Notification.requestPermission();
+    // Seccion notificaciones
+    BTN_NOTIFICATIONS = document.querySelector('#notifications-install');
+    BTN_NOTIFICATIONS.addEventListener('click', requestPermission);
   
     if ('serviceWorker' in navigator) {
       await navigator.serviceWorker.register('sw.js');
